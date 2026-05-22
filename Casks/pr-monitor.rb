@@ -11,6 +11,11 @@ cask "pr-monitor" do
     if system_command("/usr/bin/pgrep", args: ["-ix", "PR Monitor"], print_stderr: false, must_succeed: false).exit_status == 0
       odie "PR Monitor is currently running. Quit it first, then re-run:\n  brew upgrade --cask pr-monitor"
     end
+
+    caskroom_entry = File.join(ENV.fetch("HOMEBREW_PREFIX", "/usr/local"), "Caskroom", "pr-monitor")
+    if File.exist?("/Applications/PR Monitor.app") && !File.exist?(caskroom_entry)
+      odie "PR Monitor is installed outside Homebrew. Move it to Trash first:\n  mv \"/Applications/PR Monitor.app\" ~/.Trash/\nThen re-run:\n  brew install --cask pr-monitor"
+    end
   end
 
   app "PR Monitor.app"
