@@ -8,7 +8,7 @@ cask "pr-monitor" do
   homepage "https://github.com/jeanjacquesaka1980/pr-monitor"
 
   preflight do
-    if system_command("/usr/bin/pgrep", args: ["-ix", "PR Monitor"], print_stderr: false).exit_status == 0
+    if system_command("/usr/bin/pgrep", args: ["-ix", "PR Monitor"], print_stderr: false, must_succeed: false).exit_status == 0
       odie "PR Monitor is currently running. Quit it first, then re-run:\n  brew upgrade --cask pr-monitor"
     end
 
