@@ -1,6 +1,6 @@
 cask "pr-monitor" do
-  version "1.12.4"
-  sha256 "c81f5c887036a8c3912ef0f72a8445f7643a5829db60992d11a48600e28ab3ef"
+  version "1.12.5"
+  sha256 "23548de71c6fce3330311c577f0f06559ea607ceb425c8e1c0636a000780f932"
 
   url "https://github.com/jeanjacquesaka1980/pr-monitor/releases/download/v#{version}/PR.Monitor-#{version}-universal-mac.zip"
   name "PR Monitor"
@@ -30,7 +30,7 @@ cask "pr-monitor" do
       odie <<~EOS
         PR Monitor is installed outside Homebrew (e.g. via npm run start).
         Move it to Trash first:
-          mv "/Applications/PR Monitor.app" ~/.Trash/
+          rm -rf "/Applications/PR Monitor.app"
         Then re-run:
           brew install --cask pr-monitor
 
