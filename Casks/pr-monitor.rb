@@ -1,6 +1,6 @@
 cask "pr-monitor" do
-  version "1.12.3"
-  sha256 "fd56fe706a623a8d9c622e0b3224a30a5d540fd04f89cf9cb7810c4c4c3d9144"
+  version "1.12.4"
+  sha256 "c81f5c887036a8c3912ef0f72a8445f7643a5829db60992d11a48600e28ab3ef"
 
   url "https://github.com/jeanjacquesaka1980/pr-monitor/releases/download/v#{version}/PR.Monitor-#{version}-universal-mac.zip"
   name "PR Monitor"
@@ -15,6 +15,14 @@ cask "pr-monitor" do
         break if system_command("/usr/bin/pgrep", args: ["-ix", "PR Monitor"], print_stderr: false, must_succeed: false).exit_status != 0
         sleep 1
       end
+      sleep 2
+    end
+
+    if File.exist?("/Applications/PR Monitor.app")
+      system_command "/usr/bin/xattr",
+        args: ["-cr", "/Applications/PR Monitor.app"],
+        print_stderr: false,
+        must_succeed: false
     end
 
     caskroom_entry = File.join(ENV.fetch("HOMEBREW_PREFIX", "/usr/local"), "Caskroom", "pr-monitor")
@@ -29,6 +37,13 @@ cask "pr-monitor" do
         Troubleshooting: https://github.com/jeanjacquesaka1980/pr-monitor#troubleshooting
       EOS
     end
+  end
+
+  postflight do
+    system_command "/usr/bin/xattr",
+      args: ["-dr", "com.apple.quarantine", "#{appdir}/PR Monitor.app"],
+      print_stderr: false,
+      must_succeed: false
   end
 
   app "PR Monitor.app"
