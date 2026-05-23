@@ -9,12 +9,9 @@ cask "pr-monitor" do
 
   preflight do
     if system_command("/usr/bin/pgrep", args: ["-ix", "PR Monitor"], print_stderr: false, must_succeed: false).exit_status == 0
-      odie <<~EOS
-        PR Monitor is currently running. Quit it first (click x in the app or right-click the tray icon -> Quit), then re-run:
-          brew reinstall --cask pr-monitor
-
-        Troubleshooting: https://github.com/jeanjacquesaka1980/pr-monitor#troubleshooting
-      EOS
+      puts "PR Monitor is running -- quitting it before upgrade..."
+      system_command("/usr/bin/osascript", args: ["-e", 'quit app "PR Monitor"'], print_stderr: false, must_succeed: false)
+      sleep 2
     end
 
     caskroom_entry = File.join(ENV.fetch("HOMEBREW_PREFIX", "/usr/local"), "Caskroom", "pr-monitor")
