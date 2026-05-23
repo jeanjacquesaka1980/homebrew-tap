@@ -11,7 +11,7 @@ cask "pr-monitor" do
     if system_command("/usr/bin/pgrep", args: ["-ix", "PR Monitor"], print_stderr: false, must_succeed: false).exit_status == 0
       odie <<~EOS
         PR Monitor is currently running. Quit it first (click x in the app or right-click the tray icon -> Quit), then re-run:
-          brew upgrade --cask pr-monitor
+          brew reinstall --cask pr-monitor
 
         Troubleshooting: https://github.com/jeanjacquesaka1980/pr-monitor#troubleshooting
       EOS
