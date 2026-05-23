@@ -9,16 +9,38 @@ cask "pr-monitor" do
 
   preflight do
     if system_command("/usr/bin/pgrep", args: ["-ix", "PR Monitor"], print_stderr: false, must_succeed: false).exit_status == 0
-      odie "PR Monitor is currently running. Quit it first, then re-run:\n  brew upgrade --cask pr-monitor"
+      odie <<~EOS
+        PR Monitor is currently running. Quit it first (click x in the app or right-click the tray icon -> Quit), then re-run:
+          brew upgrade --cask pr-monitor
+
+        Troubleshooting: https://github.com/jeanjacquesaka1980/pr-monitor#troubleshooting
+      EOS
     end
 
     caskroom_entry = File.join(ENV.fetch("HOMEBREW_PREFIX", "/usr/local"), "Caskroom", "pr-monitor")
     if File.exist?("/Applications/PR Monitor.app") && !File.exist?(caskroom_entry)
-      odie "PR Monitor is installed outside Homebrew. Move it to Trash first:\n  mv \"/Applications/PR Monitor.app\" ~/.Trash/\nThen re-run:\n  brew install --cask pr-monitor"
+      odie <<~EOS
+        PR Monitor is installed outside Homebrew (e.g. via npm run start).
+        Move it to Trash first:
+          mv "/Applications/PR Monitor.app" ~/.Trash/
+        Then re-run:
+          brew install --cask pr-monitor
+
+        Troubleshooting: https://github.com/jeanjacquesaka1980/pr-monitor#troubleshooting
+      EOS
     end
   end
 
   app "PR Monitor.app"
+
+  caveats <<~EOS
+    Getting started:
+      1. Launch PR Monitor from Spotlight (Cmd+Space -> PR Monitor) or Applications.
+      2. Authenticate with GitHub if prompted -- the app will guide you through it.
+      3. To upgrade in future: quit the app, then run brew upgrade --cask pr-monitor
+
+    Troubleshooting: https://github.com/jeanjacquesaka1980/pr-monitor#troubleshooting
+  EOS
 
   zap trash: [
     "~/Library/Application Support/PR Monitor",
