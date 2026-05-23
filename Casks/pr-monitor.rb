@@ -1,6 +1,6 @@
 cask "pr-monitor" do
-  version "1.12.1"
-  sha256 "cbf5a8945185b9ebaf9ef3af74df8350cc600cf95c8865193b0cdbc239e647c9"
+  version "1.12.2"
+  sha256 "2f17559bf2213cc2490e078ada61f9447019ce94944c792cbd51b686d87f0a19"
 
   url "https://github.com/jeanjacquesaka1980/pr-monitor/releases/download/v#{version}/PR.Monitor-#{version}-universal-mac.zip"
   name "PR Monitor"
@@ -37,7 +37,7 @@ cask "pr-monitor" do
     Getting started:
       1. Launch PR Monitor from Spotlight (Cmd+Space -> PR Monitor) or Applications.
       2. Authenticate with GitHub if prompted -- the app will guide you through it.
-      3. To upgrade in future: quit the app, then run brew upgrade --cask pr-monitor
+      3. To upgrade in future: just run brew upgrade --cask pr-monitor
 
     Troubleshooting: https://github.com/jeanjacquesaka1980/pr-monitor#troubleshooting
   EOS
