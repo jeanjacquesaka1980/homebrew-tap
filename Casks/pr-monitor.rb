@@ -1,6 +1,6 @@
 cask "pr-monitor" do
   version "1.13.1"
-  sha256 "658e8f0acaf02e0cbbeb362232f7549a6d085bea904b52d87d0a757e1bccd819"
+  sha256 "87ad22df22775c1128f986dfa0b727c7debfbd6f73df80bfdd6879366c931964"
 
   url "https://github.com/jeanjacquesaka1980/pr-monitor/releases/download/v#{version}/PR.Monitor-#{version}-universal-mac.zip"
   name "PR Monitor"
